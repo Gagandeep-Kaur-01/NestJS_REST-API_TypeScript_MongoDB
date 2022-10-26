@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { JobsService } from './jobs.service';
 
 
 @Controller('jobs')
 
 export class JobsController {
+    constructor(private readonly jobsService: JobsService) {}
 
     // localhost:3000/jobs
     @Get()
