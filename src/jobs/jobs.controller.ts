@@ -16,19 +16,19 @@ export class JobsController {
     // localhost:3000/jobs
     @Post()
     create(): string {
-        return '--create--'
+        return '--create--';
     }
 
     // localhost:3000/jobs/id
     @Put(':id')
     update(): string {
-        return '--update----'
+        return '--update----';
     }
 
     // localhost:3000/jobs/id
     @Delete(':id')
     delete(): string {
-        return '---delete---'
+        return '---delete---';
     }
 
 }
