@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Res, HttpStatus } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { JobDTO } from './dtos/job.dto';
 import { Job } from './interfaces/jobs.interface';
@@ -9,10 +9,22 @@ import { Job } from './interfaces/jobs.interface';
 export class JobsController {
     constructor(private readonly jobsService: JobsService) {}
 
-    // localhost:3000/jobs
+    // localhost:3000/jobs/id
     @Get(':id')
     find(@Param('id') id): Promise<Job> {
         return this.jobsService.find(id);
+    }
+
+    // localhost:3000/jobs
+    @Get()
+    async getJobs(@Res() response) {
+    try {
+    const studentData = await this.jobsService.getAllJobs();
+    return response.status(HttpStatus.OK).json({
+    message: 'All jobs data found successfully', studentData,});
+    } catch (err) {
+    return response.status(err.status).json(err.response);
+    }
     }
 
     // localhost:3000/jobs
